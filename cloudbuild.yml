@@ -1,0 +1,22 @@
+steps:
+  - name: nixorg/nix:latest
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        nix-channel --add \
+        https://nixos.org/channels/nixpkgs-unstable nixpkgs
+        nix-channel --update
+
+        env
+
+        nix-shell --pure pipeline.nix --run bash <<'NIXSH'
+          set -euo pipefail
+
+          test-step
+
+          if on-deploy-branch; then
+            deploy-step
+          fi
+
+        NIXSH
