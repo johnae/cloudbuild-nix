@@ -7,9 +7,11 @@ steps:
         nix-channel --add \
         https://nixos.org/channels/nixpkgs-unstable nixpkgs
         nix-channel --update
+        env
 
         nix-shell --pure pipeline.nix --run bash <<'NIXSH'
           set -euo pipefail
+          env
 
           test-step
 
