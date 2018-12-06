@@ -17,15 +17,17 @@ steps:
         nix-channel --update
         env
 
-        nix-shell --keep PROJECT_ID \
+        nix-shell pipeline.nix \
+                  --pure \
+                  --keep PROJECT_ID \
                   --keep BUILD_ID \
                   --keep COMMIT_SHA \
                   --keep SHORT_SHA \
                   --keep REPO_NAME \
                   --keep BRANCH_NAME \
                   --keep TAG_NAME \
-                  --pure \
-                  pipeline.nix --run bash <<'NIXSH'
+                  --run bash <<'NIXSH'
+
           set -euo pipefail
           env
 
