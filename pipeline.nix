@@ -12,7 +12,6 @@ let
 
   test-step = writeShellScriptBin "test-step" ''
     echo "Running tests now"
-    false
   '';
 
   on-deploy-branch = writeShellScriptBin "on-deploy-branch" ''
